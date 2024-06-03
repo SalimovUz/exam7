@@ -32,17 +32,17 @@ const Carousel = () => {
   ];
 
   return (
-    <div className="relative w-full h-[450px] bg-[#fafafa] py-12 px-8 mt-4">
+    <div className="relative z-[-1] w-full h-[450px] bg-[#fafafa] py-12 px-8 mt-4">
       <div className="carousel flex overflow-hidden">
         {pages.map((page, index) => (
           <div
             key={index}
-            className={`flex-none w-full transition-transform duration-500 ${
+            className={`flex-none w-full transition-transform duration-500 z-0 ${
               activeIndex === index ? "translate-x-0" : "translate-x-full"
             }`}
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
           >
-            <div className="flex">
+            <div className="flex z-0">
               <div className="left w-1/2 flex flex-col items-start">
                 <h3 className="font-medium text-[14px] tracking-widest">
                   {page.title}

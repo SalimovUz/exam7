@@ -11,3 +11,24 @@ body {
   opacity: 1;
     transition: all 0.3s;
 }
+
+.category {
+  div:hover {
+    cursor: pointer;
+    h4 {
+      color: #46a358;
+      font-weight: 500;
+    }
+  }
+}
+
+.sizes {
+  div:hover {
+      cursor: pointer;
+  
+      h4 {
+        color: #46a358;
+        font-weight: 500;
+      }
+    }
+}

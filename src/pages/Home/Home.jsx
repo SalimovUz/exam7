@@ -14,18 +14,11 @@ import like from "../../../public/images/heart 1.svg";
 import search from "../../../public/images/searching.svg";
 import Popular from "../../components/Popular";
 import Blog from "../../components/Blog";
+import { NavLink } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState("All Plants");
   const [currentPage, setCurrentPage] = useState(0);
-
-  const handleTabClick = (tabName) => {
-    console.log(tabName, "tabName clicked"); // Funksiya chaqirilayotganini tekshirish uchun
-    setActiveTab(tabName);
-  };
-
-  // activeTab holatini tekshirish uchun
-  console.log(activeTab, "activeTab current");
 
   const itemsPerPage = 9;
 
@@ -37,8 +30,13 @@ const Home = () => {
     setCurrentPage(selected);
   };
 
+  const addtocartnum = () => {
+    const cartnum = document.querySelector(".cartnum");
+    cartnum.innerHTML = parseInt(cartnum.innerHTML) + 1;
+  };
+
   return (
-    <div className="">
+    <div className="heee">
       <Carousel />
 
       <main className="flex w-full mt-8 gap-12">
@@ -121,20 +119,19 @@ const Home = () => {
 
         <div className="section w-full">
           <div className="top flex items-center justify-between">
-            <ul className="left flex space-x-4">
-              {["All Plants", "New Arrivals", "Sale"].map((tabName) => (
-                <li
-                  key={tabName}
-                  className={`cursor-pointer pb-2 ${
-                    activeTab === tabName
-                      ? "border-b-2 border-[#46a358] text-[#46a358]"
-                      : "text-gray-600"
-                  }`}
-                  onClick={() => handleTabClick(tabName)}
-                >
-                  {tabName}
-                </li>
-              ))}
+            <ul className="cate left  flex space-x-4">
+              <NavLink
+                className="border-b-2 border-[#46a358] text-[#46a358] text-[15px] font-semibold"
+                to="/"
+              >
+                All Plants
+              </NavLink>
+              <NavLink className=" text-[#3D3D3D] text-[15px]" to="/">
+                New Arrivals
+              </NavLink>
+              <NavLink className=" text-[#3D3D3D] text-[15px]" to="/">
+                Sale
+              </NavLink>
             </ul>
             <div className="right">
               <h3 className="text-gray-700">
@@ -142,7 +139,7 @@ const Home = () => {
                 <select
                   name="sort"
                   id="sort"
-                  className="ml-2 border border-gray-300 rounded-md p-1"
+                  className="ml-2 border border-gray-300 rounded-md p-1 border-none"
                 >
                   <option value="default">Default sorting</option>
                   <option value="name">Name</option>
@@ -153,11 +150,11 @@ const Home = () => {
             </div>
           </div>
 
-          <div>
+          <div className="data">
             <div className="flowers flex flex-wrap w-full justify-between gap-8 mt-8">
               {currentPageData.map((flower) => (
                 <div
-                  className="w-[30%] main-card cursor-pointer border-t-2 border-transparent transition-all duration-300 hover:border-t-2 hover:border-[#46a358]"
+                  className="w-[30%] shadow-md main-card cursor-pointer border-t-2 border-transparent transition-all duration-300 hover:border-t-2 hover:border-[#46a358]"
                   key={flower.id}
                 >
                   <div className="p-6 w-full border">
@@ -169,6 +166,7 @@ const Home = () => {
 
                     <div className="hovver flex relative gap-4 justify-center opacity-0">
                       <img
+                        onClick={addtocartnum}
                         className="bg-[#fafafa] px-2 py-2 rounded-lg"
                         src={cart}
                         alt=""
@@ -185,8 +183,10 @@ const Home = () => {
                       />
                     </div>
                   </div>
-                  <p className="mt-2 text-lg font-medium">{flower.name}</p>
-                  <h2 className="text-xl font-semibold text-[#46a358]">
+                  <p className="mt-2 text-[16px] font-normal text-[#3D3D3D]">
+                    {flower.name}
+                  </p>
+                  <h2 className="text-[18px] font-bold text-[#46a358]">
                     {flower.price}
                   </h2>
                 </div>
@@ -223,9 +223,12 @@ const Home = () => {
         </div>
       </main>
 
-      <Popular/>
-      <Blog/>
-      {/* <Footer/> */}
+      <Popular />
+      <Blog />
+
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 };
