@@ -9,6 +9,11 @@ import google from "../public/images/google.svg";
 import facebook from "../public/images/faceboook.svg";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Accaunt from "./pages/Accaunt/Accaunt";
+import PlantCare from "./pages/PlantCare";
+import Blogs from "./pages/Blogs";
+// import FlowerDetail from "./components/FlowerDetail";
+import FlowerList from "./components/FlowerList";
+import { data } from "./data/data";
 
 const App = () => {
   const [modal, setModal] = useState(false);
@@ -232,8 +237,11 @@ const App = () => {
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-0">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/shop" element={<Shop flowers={data} />} />
           <Route path="/accaunt" element={<Accaunt />} />
+          <Route path="/plantcare" element={<PlantCare />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/shop/flower/:id" element={<Shop />} />
         </Routes>
       </div>
     </div>

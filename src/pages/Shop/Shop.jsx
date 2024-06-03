@@ -1,45 +1,73 @@
 import React from "react";
+import { useParams, NavLink } from "react-router-dom";
 import HoverRating from "../../components/HoverRating";
 import Footer from "../../components/Footer";
+import ProductDescription from "../../components/ProductDescription";
+import ProductCarousel from "../../components/ProductCarousel";
+import { data } from "../../data/data";
+import NoneShop from "./NoneShop";
+import FlowerDetail from "../../components/FlowerDetail";
+import ShopCarousel from "../../components/ShopCarousel";
 
 const Shop = () => {
+  const { id } = useParams();
+  const flower = data.find((f) => f.id === id);
+
+  if (!id) {
+    return (
+      <div className="flex flex-col justify-center items-center">
+        <NoneShop />
+      </div>
+    );
+  }
+
+  // if (!flower) {
+  //   return <div>Flower not found</div>;
+  // }
+
   return (
-    <div>
+    <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-0">
       <h1 className="text-[#3D3D3D] font-bold text-[15px] lg:mt-8">
-        Home / <span className="font-normal ">Shop</span>
+        <NavLink to="/">Home</NavLink> /{" "}
+        <span className="font-normal ">Shop</span>
       </h1>
 
-      <div className="comingItems">
-        <div className="left flex">
-          <div className="four flex flex-col"></div>
-          <img src="" alt="" />
+      {/* <div className="comingItems flex">
+        <div className="left flex w-1/2">
+          <img src={flower.image} alt={flower.name} className="w-full h-auto" />
         </div>
 
-        <div className="right justify-between w-1/2">
-          <h1 className="text-[#3D3D3D] text-[28px] font-bold">Flower Name</h1>
+        <div className="right w-1/2 pl-8">
+          <h1 className="text-[#3D3D3D] text-[28px] font-bold">
+            {flower.name}
+          </h1>
 
-          <div className="flex">
-            <h2>Price</h2>
-
+          <div className="flex items-center mt-4">
+            <h2 className="text-xl font-semibold text-[#46a358] mr-4">
+              {flower.price}
+            </h2>
             <HoverRating />
           </div>
 
-          <div>
-            <h3>Short Description:</h3>
-
-            <p>
+          <div className="mt-4">
+            <h3 className="text-lg font-semibold">Short Description:</h3>
+            <p className="text-gray-600 mt-2">
               The ceramic cylinder planters come with a wooden stand to help
               elevate your plants off the ground. The ceramic cylinder planters
               come with a wooden stand to help elevate your plants off the
-              ground.{" "}
+              ground.
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div>
-        <Footer />
-      </div>
+      <FlowerDetail />
+
+      <ProductDescription />
+
+      <ShopCarousel />
+
+      <Footer />
     </div>
   );
 };

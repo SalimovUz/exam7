@@ -22,7 +22,7 @@ export default function HoverRating() {
   return (
     <Box
       sx={{
-        width: 200,
+        width: 300,
         display: "flex",
         alignItems: "center",
       }}
@@ -41,7 +41,9 @@ export default function HoverRating() {
         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
       />
       {value !== null && (
-        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+        <Box sx={{ ml: 2, fontSize: "13px" }}>
+          {labels[hover !== -1 ? hover : value]}
+        </Box>
       )}
     </Box>
   );

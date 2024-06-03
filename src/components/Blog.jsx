@@ -2,7 +2,6 @@ import React from "react";
 import { blogdata } from "../data/blogposts";
 import { FaArrowRightLong } from "react-icons/fa6";
 
-
 const Blog = () => {
   return (
     <div className="lg:mt-24">

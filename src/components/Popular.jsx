@@ -3,7 +3,6 @@ import one from "../../public/images/popular1.svg";
 import two from "../../public/images/popular2.svg";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
-
 const Popular = () => {
   return (
     <div className="flex justify-between w-full lg:mt-16 gap-8">

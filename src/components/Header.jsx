@@ -5,8 +5,7 @@ import logout from "../../public/images/Logout.svg";
 import search from "../../public/images/search.svg";
 import { NavLink } from "react-router-dom";
 
-const Header = ({tolqin}) => {
-
+const Header = ({ tolqin }) => {
   return (
     <div className="header">
       <nav className="mx-auto z-10 max-w-7xl px-2 sm:px-6 lg:px-0 flex items-center justify-between border-solid border-b border-[#c4e2ca]">
@@ -45,7 +44,7 @@ const Header = ({tolqin}) => {
           </div>
 
           <button
-            onClick={()=> tolqin(eski => !eski)}
+            onClick={() => tolqin((eski) => !eski)}
             className="flex items-center bg-[#46a358] text-white px-3 py-1 rounded"
           >
             <img src={logout} alt="Logout" className="mr-2" />

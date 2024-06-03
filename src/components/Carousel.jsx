@@ -3,7 +3,6 @@ import bigFlower from "../../public/images/big.svg";
 import smallFlower from "../../public/images/small.svg";
 import { useState } from "react";
 
-
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 

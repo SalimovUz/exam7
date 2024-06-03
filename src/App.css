@@ -9,7 +9,14 @@ body {
 
 .main-card:hover .hovver {
   opacity: 1;
-    transition: all 0.3s;
+  transition: all 0.3s, transform 0.3s;
+  transform: translateY(12px);
+}
+
+.main-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  scale: 20px;
+  transition: all 0.5s;
 }
 
 .category {
@@ -32,3 +39,6 @@ body {
       }
     }
 }
+
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
