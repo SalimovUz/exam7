@@ -1,13 +1,49 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
 import { data } from "../data/data"; // Adjust the import path as needed
 import HoverRating from "./HoverRating";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { MdOutlineForwardToInbox } from "react-icons/md";
+import { GrFavorite } from "react-icons/gr";
 
 const FlowerDetail = () => {
+  const [num, SetNum] = useState(0);
+  if (num < 0) {
+    SetNum(0);
+  }
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
+
+  const addtocartnum = () => {
+    // const cartNum = document.querySelector(".cartnum");
+    // cartNum.innerHTML = parseInt(cartNum.innerHTML) + 1;
+    SetNum(num + 1);
+  };
+  const minustocartnum = () => {
+    if (num <= 0) return;
+    // const cartNum = document.querySelector(".cartnum");
+    SetNum(num - 1);
+    // cartNum.innerHTML = parseInt(cartNum.innerHTML) - 1;
+  };
+  
+  // Header ga qo'shish card ni
+  
+  const [addheader, setAddheader] = useState(false);
+  
+  const handleAddheader = () => {
+    const cartNum = document.querySelector(".cartnum");
+    cartNum.innerHTML = 1;
+    setAddheader(true);
+    if (num === 0) {
+      cartNum.innerHTML = 0;
+    }
+  };
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [selectedFlower, setSelectedFlower] = useState(
@@ -70,13 +106,39 @@ const FlowerDetail = () => {
                 </button>
               ))}
             </div>
-            <div className="flex items-center mt-6">
-              <button className="bg-[#46a358] text-white px-6 py-2 rounded hover:bg-green-700">
-                BUY NOW
-              </button>
-              <button className="bg-white border border-[#46a358] text-[#46a358] px-6 py-2 rounded ml-4 hover:bg-gray-100">
+            <div className="flex items-center mt-6 gap-4">
+              <div className="gap-4 flex">
+                <button
+                  onClick={minustocartnum}
+                  className="bg-[#46A358] rounded-full w-[33px] h-[35px] text-white"
+                >
+                  -
+                </button>
+                <button>{num}</button>
+                <button
+                  onClick={addtocartnum}
+                  className="bg-[#46A358] rounded-full w-[33px] h-[35px] text-white"
+                >
+                  +
+                </button>
+              </div>
+              <NavLink >
+                <button className="bg-[#46a358] text-white px-6 py-2 rounded hover:bg-green-700">
+                  BUY NOW
+                </button>
+              </NavLink>
+              <button
+                onClick={handleAddheader}
+                className="bg-white border-2 border-[#46a358] text-[#46a358] px-6 py-2 rounded-[6px] hover:bg-gray-100"
+              >
                 ADD TO CART
               </button>
+              <GrFavorite
+                className={`border-2 cursor-pointer w-[36px] h-[36px] p-1 rounded-[6px] border-[#46A358] ${
+                  isClicked ? "bg-[#46A358] text-white" : "text-[#46A358] "
+                }`}
+                onClick={handleClick}
+              />
             </div>
             <div className="flex flex-col gap-2 mt-4">
               <h1 className="text-[15px] font-normal text-[#adabab]">

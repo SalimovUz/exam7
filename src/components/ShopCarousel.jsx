@@ -5,6 +5,7 @@ import cart from "../../public/images/cart-card.svg";
 import like from "../../public/images/heart 1.svg";
 import search from "../../public/images/searching.svg";
 import "../App.css";
+import { NavLink } from "react-router-dom";
 
 const TOTAL_PAGES = 3;
 const ITEMS_PER_PAGE = Math.ceil(data.length / TOTAL_PAGES);
@@ -29,40 +30,45 @@ const ShopCarousel = () => {
       <hr className="py-4" />
       <div className="flex overflow-hidden">
         {currentItems.map((item) => (
-          <div key={item.id} className="w-1/5 flex-shrink-0 p-4">
-            <div className="p-6 w-full shadow-md main-card">
-              <img
-                className="w-full h-48 object-cover"
-                src={item.image}
-                alt={item.name}
-              />
-              <div className="hovver flex relative gap-4 justify-center opacity-0">
+          <NavLink
+            className="flex-shrink-0"
+            to={`/shop/flower/${item.id}`}
+          >
+            <div key={item.id} className="w-full flex-shrink-0 p-4">
+              <div className="p-4 w-full shadow-md main-card">
                 <img
-                  className="bg-[#fafafa] px-2 py-2 rounded-lg"
-                  src={cart}
-                  alt=""
+                  className="w-full h-48 object-cover"
+                  src={item.image}
+                  alt={item.name}
                 />
-                <img
-                  className="bu bg-[#fafafa] px-2 py-2 rounded-lg"
-                  src={like}
-                  alt=""
-                />
-                <img
-                  className="bg-[#fafafa] px-2 py-2 rounded-lg"
-                  src={search}
-                  alt=""
-                />
+                <div className="hovver flex relative gap-4 justify-center opacity-0">
+                  <img
+                    className="bg-[#fafafa] px-2 py-2 rounded-lg"
+                    src={cart}
+                    alt=""
+                  />
+                  <img
+                    className="bu bg-[#fafafa] px-2 py-2 rounded-lg"
+                    src={like}
+                    alt=""
+                  />
+                  <img
+                    className="bg-[#fafafa] px-2 py-2 rounded-lg"
+                    src={search}
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div className="">
+                <p className="mt-2 text-[16px] font-normal text-[#3D3D3D]">
+                  {item.name}
+                </p>
+                <h2 className="text-[18px] font-bold text-[#46a358]">
+                  {item.price}
+                </h2>
               </div>
             </div>
-            <div className="">
-              <p className="mt-2 text-[16px] font-normal text-[#3D3D3D]">
-                {item.name}
-              </p>
-              <h2 className="text-[18px] font-bold text-[#46a358]">
-                {item.price}
-              </h2>
-            </div>
-          </div>
+          </NavLink>
         ))}
       </div>
       <div className="flex justify-center mt-4">

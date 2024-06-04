@@ -23,7 +23,8 @@ const FlowerList = ({ flowers }) => {
   };
 
   const addtocartnum = () => {
-    // Handle add to cart functionality
+    const cartNum = document.querySelector(".cartnum");
+    cartNum.innerHTML = parseInt(cartNum.innerHTML) + 1;
   };
 
   return (
@@ -31,16 +32,18 @@ const FlowerList = ({ flowers }) => {
       <div className="flowers flex flex-wrap w-full justify-between gap-8 mt-8">
         {currentPageData.map((flower) => (
           <NavLink
-            to={`/shop/flower/${flower.id}`}
+            // to={`/shop/flower/${flower.id}`}
             key={flower.id}
             className="w-[30%] shadow-md main-card cursor-pointer border-t-2 border-transparent transition-all duration-300 hover:border-t-2 hover:border-[#46a358]"
           >
             <div className="p-6 w-full border">
-              <img
-                className="w-full h-48 object-cover"
-                src={flower.image}
-                alt={flower.name}
-              />
+              <NavLink to={`/shop/flower/${flower.id}`}>
+                <img
+                  className="w-full h-48 object-cover"
+                  src={flower.image}
+                  alt={flower.name}
+                />
+              </NavLink>
               <div className="hovver flex relative gap-4 justify-center opacity-0">
                 <img
                   onClick={addtocartnum}

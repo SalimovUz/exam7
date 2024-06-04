@@ -79,10 +79,12 @@ const Accaunt = () => {
                   <input
                     className="border rounded-md border-[#EAEAEA] p-2"
                     type="text"
+                    name="name"
+                    id="name"
                   />
                 </label>
 
-                <label className="flex flex-col gap-2" htmlFor="name">
+                <label className="flex flex-col gap-2" htmlFor="email">
                   <h1>
                     Email address
                     <span className="text-[#F03800] text-[22px] font-normal">
@@ -92,10 +94,12 @@ const Accaunt = () => {
                   <input
                     className="border rounded-md border-[#EAEAEA] p-2"
                     type="email"
+                    name="email"
+                    id="email"
                   />
                 </label>
 
-                <label className="flex flex-col gap-2" htmlFor="name">
+                <label className="flex flex-col gap-2" htmlFor="username">
                   <h1>
                     Username
                     <span className="text-[#F03800] text-[22px] font-normal">
@@ -105,13 +109,15 @@ const Accaunt = () => {
                   <input
                     className="border rounded-md border-[#EAEAEA] p-2"
                     type="text"
+                    name="username"
+                    id="username"
                   />
                 </label>
 
                 <h1 className="text-[#3D3D3D] font-medium text-[16px] mt-8">
                   Password change
                 </h1>
-                <label className="flex flex-col gap-2" htmlFor="name">
+                <label className="flex flex-col gap-2" htmlFor="password">
                   <h1>
                     FCurrent password
                     <span className="text-[#F03800] text-[22px] font-normal">
@@ -121,10 +127,12 @@ const Accaunt = () => {
                   <input
                     className="border rounded-md border-[#EAEAEA] p-2"
                     type="password"
+                    name="password"
+                    id="password"
                   />
                 </label>
 
-                <label className="flex flex-col gap-2" htmlFor="name">
+                <label className="flex flex-col gap-2" htmlFor="newpassword">
                   <h1>
                     New password
                     <span className="text-[#F03800] text-[22px] font-normal">
@@ -134,10 +142,12 @@ const Accaunt = () => {
                   <input
                     className="border rounded-md border-[#EAEAEA] p-2"
                     type="password"
+                    name="newpassword"
+                    id="newpassword"
                   />
                 </label>
 
-                <label className="flex flex-col gap-2" htmlFor="name">
+                <label className="flex flex-col gap-2" htmlFor="confirmpass">
                   <h1>
                     Confirm new password
                     <span className="text-[#F03800] text-[22px] font-normal">
@@ -147,6 +157,8 @@ const Accaunt = () => {
                   <input
                     className="border rounded-md border-[#EAEAEA] p-2"
                     type="password"
+                    name="confirmpass"
+                    id="confirmpass"
                   />
                 </label>
 

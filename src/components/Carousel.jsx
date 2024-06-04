@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import bigFlower from "../../public/images/big.svg";
 import smallFlower from "../../public/images/small.svg";
-import { useState } from "react";
 
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -30,13 +29,21 @@ const Carousel = () => {
     },
   ];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % pages.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [pages.length]);
+
   return (
-    <div className="relative z-[-1] w-full h-[450px] bg-[#fafafa] py-12 px-8 mt-4">
+    <div className="relative z-1 w-full h-[450px] bg-[#fafafa] py-12 px-8 mt-4">
       <div className="carousel flex overflow-hidden">
         {pages.map((page, index) => (
           <div
             key={index}
-            className={`flex-none w-full transition-transform duration-500 z-0 ${
+            className={`flex-none w-full transition-transform duration-500 ${
               activeIndex === index ? "translate-x-0" : "translate-x-full"
             }`}
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -76,7 +83,7 @@ const Carousel = () => {
           </div>
         ))}
       </div>
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 cursor-pointer z-30 ">
         {pages.map((_, index) => (
           <button
             key={index}
