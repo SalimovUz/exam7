@@ -254,7 +254,8 @@
 // export default App;
 
 import React, { useEffect, useState } from "react";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Shop from "./pages/Shop/Shop";
 import Home from "./pages/Home/Home";
 import Header from "./components/Header";
@@ -266,7 +267,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Accaunt from "./pages/Accaunt/Accaunt";
 import PlantCare from "./pages/PlantCare";
 import Blogs from "./pages/Blogs";
-import ShoppingCart from "./components/ShoppingCart"; // Import ShoppingCart
+import ShoppingCart from "./components/ShoppingCart";
+import { CartProvider } from "./context/CartContext";
 
 const App = () => {
   const [modal, setModal] = useState(false);
@@ -485,18 +487,21 @@ const App = () => {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-0">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/accaunt" element={<Accaunt />} />
-          <Route path="/plantcare" element={<PlantCare />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/shop/flower/:id" element={<Shop />} />
-          <Route path="/cart" element={<ShoppingCart />} />
-          {/* Add ShoppingCart route */}
-        </Routes>
-      </div>
+      <CartProvider>
+        {/* <Router> */}
+        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-0">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/accaunt" element={<Accaunt />} />
+            <Route path="/plantcare" element={<PlantCare />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/shop/flower/:id" element={<Shop />} />
+            <Route path="/cart" element={<ShoppingCart />} />
+          </Routes>
+        </div>
+        {/* </Router> */}
+      </CartProvider>
     </>
   );
 };

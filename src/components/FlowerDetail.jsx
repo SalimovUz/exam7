@@ -122,7 +122,7 @@ const FlowerDetail = () => {
                   +
                 </button>
               </div>
-              <NavLink >
+              <NavLink to="/cart">
                 <button className="bg-[#46a358] text-white px-6 py-2 rounded hover:bg-green-700">
                   BUY NOW
                 </button>

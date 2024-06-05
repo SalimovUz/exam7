@@ -17,9 +17,14 @@ const NoneShop = () => {
           <span className="font-normal ">Shop</span>
         </h1>
 
+        <h2 className="py-12 text-[15px] font-semibold opacity-80">
+          Siz hali birorta hech narsa tanlamadiz, tanlash uchun pastdagi tugmani
+          bosing
+        </h2>
+
         <NavLink
           to="/"
-          className="bg-[#46a358] text-white px-4 py-2 rounded my-20 inline-flex"
+          className="bg-[#46a358] text-white px-4 py-2 rounded mb-20 inline-flex"
         >
           Go to shop
         </NavLink>

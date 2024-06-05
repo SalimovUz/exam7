@@ -40,7 +40,9 @@ const Header = ({ tolqin }) => {
             <button className="cartnum absolute rounded-full w-4 h-4 p-1 justify-center ml-3 bg-[#46A358] text-white text-[10px] font-medium text-center flex items-center">
               0
             </button>
-            <img src={cart} alt="Cart" />
+            <NavLink to="/cart">
+              <img src={cart} alt="Cart" />
+            </NavLink>
           </div>
 
           <button
