@@ -4,7 +4,7 @@ const CartContext = createContext();
 
 const initialState = {
   cart: [],
-  shippingCost: 5, // Yetkazib berish narxi
+  shippingCost: 16, // Yetkazib berish narxi
 };
 
 const reducer = (state, action) => {
@@ -12,7 +12,14 @@ const reducer = (state, action) => {
     case "ADD_TO_CART":
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: [
+          ...state.cart,
+          {
+            ...action.payload,
+            price: parseFloat(action.payload.price), // Ensure price is a number
+            quantity: 1,
+          },
+        ],
       };
     case "REMOVE_FROM_CART":
       return {

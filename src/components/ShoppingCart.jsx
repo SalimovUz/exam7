@@ -5,7 +5,8 @@ import Footer from "./Footer";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
-  const { cart, removeFromCart, updateQuantity } = useContext(CartContext);
+  const { cart, removeFromCart, updateQuantity, shippingCost } =
+    useContext(CartContext);
   const navigate = useNavigate();
 
   const handleQuantityChange = (id, quantity) => {
@@ -30,7 +31,6 @@ const ShoppingCart = () => {
   };
 
   const totalPrice = calculateTotalPrice();
-  const shippingCost = 16.0;
   const grandTotal = totalPrice + shippingCost;
 
   const handleCheckout = () => {
@@ -39,9 +39,8 @@ const ShoppingCart = () => {
     });
   };
 
-
   return (
-    <div className="ShopCard">
+    <div className="ShopCart">
       <div className="lg:px-8 mt-8">
         <nav className="mb-4 text-sm">
           <div>
@@ -74,7 +73,7 @@ const ShoppingCart = () => {
                         <h3 className="text-lg font-medium">{item.name}</h3>
                         <p className="text-gray-500 text-sm">SKU: {item.SKU}</p>
                         <p className="text-lg font-medium">
-                          {(item.price)}
+                          ${item.price}
                         </p>
                       </div>
                     </div>
@@ -116,7 +115,7 @@ const ShoppingCart = () => {
                 <h3 className="text-lg font-medium mb-4">Cart Totals</h3>
                 <div className="flex justify-between mb-2">
                   <span>Subtotal</span>
-                  <span>${totalPrice}</span>
+                  <span>${totalPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between mb-2">
                   <span>Coupon Discount</span>

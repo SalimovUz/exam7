@@ -1,260 +1,300 @@
-import React, { useState, useContext } from "react";
-import { CartContext } from "../../context/CartContext";
-import { useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import React, { useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import payment from "../../../public/images/payment.svg";
+import "tailwindcss/tailwind.css";
+
+// Generate a random order number
+const generateOrderNumber = () => Math.floor(100000 + Math.random() * 900000);
 
 const Checkout = () => {
-  const { cart, totalPrice = 0, shippingCost = 0 } = useContext(CartContext);
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    country: "",
-    city: "",
-    streetAddress: "",
-    state: "",
-    zip: "",
-    email: "",
-    phone: "",
-    orderNotes: "",
+  const location = useLocation();
+  const { cart, totalPrice, shippingCost, grandTotal } = location.state;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [orderNumber] = useState(generateOrderNumber());
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const today = new Date().toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
   });
-  const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    // Validation logic here
-    if (!form.firstName) newErrors.firstName = "First name is required";
-    if (!form.lastName) newErrors.lastName = "Last name is required";
-    if (!form.country) newErrors.country = "Country is required";
-    if (!form.city) newErrors.city = "City is required";
-    if (!form.streetAddress)
-      newErrors.streetAddress = "Street address is required";
-    if (!form.state) newErrors.state = "State is required";
-    if (!form.zip) newErrors.zip = "ZIP code is required";
-    if (!form.email) newErrors.email = "Email is required";
-    if (!form.phone) newErrors.phone = "Phone is required";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      // Proceed with form submission
-      console.log("Form submitted", form);
-      navigate("/order-success");
+  const handlePlaceOrder = () => {
+    if (!paymentMethod) {
+      alert("Please select a payment method.");
+      return;
     }
+    setIsModalOpen(true);
   };
 
-  const calculateItemTotal = (price, quantity) => {
-    return price * quantity;
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
-
-  const grandTotal = (totalPrice + shippingCost).toFixed(2);
 
   return (
-    <div>
-      {/* <Header /> */}
+    <div className="checkout-page">
       <div className="container mx-auto mt-8">
-        <div className="flex flex-wrap">
-          <div className="w-full md:w-2/3 px-4">
-            <h2 className="text-2xl font-semibold mb-4">Checkout</h2>
-            <form onSubmit={handleSubmit}>
-              {/* Form fields */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  First Name *
-                </label>
+        <nav className="mb-4 text-sm">
+          <div>
+            <NavLink className="text-[#3D3D3D] font-bold text-[15px]" to="/">
+              Home
+            </NavLink>{" "}
+            / <NavLink to="/shop">Shop</NavLink> /{" "}
+            <NavLink to="/checkout">Checkout</NavLink>
+          </div>
+        </nav>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Billing Address</h2>
+            <form>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input
                   type="text"
-                  name="firstName"
-                  value={form.firstName}
-                  onChange={handleChange}
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  placeholder="First Name"
+                  className="input"
+                  required
                 />
-                {errors.firstName && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.firstName}
-                  </p>
-                )}
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Country *
-                </label>
                 <input
                   type="text"
-                  name="country"
-                  value={form.country}
-                  onChange={handleChange}
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  placeholder="Last Name"
+                  className="input"
+                  required
                 />
-                {errors.country && (
-                  <p className="text-red-500 text-xs mt-1">{errors.country}</p>
-                )}
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  City *
-                </label>
                 <input
                   type="text"
-                  name="city"
-                  value={form.city}
-                  onChange={handleChange}
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  placeholder="Country / Region"
+                  className="input"
+                  required
                 />
-                {errors.city && (
-                  <p className="text-red-500 text-xs mt-1">{errors.city}</p>
-                )}
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Street Address *
-                </label>
                 <input
                   type="text"
-                  name="streetAddress"
-                  value={form.streetAddress}
-                  onChange={handleChange}
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  placeholder="Town / City"
+                  className="input"
+                  required
                 />
-                {errors.streetAddress && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.streetAddress}
-                  </p>
-                )}
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  State *
-                </label>
                 <input
                   type="text"
-                  name="state"
-                  value={form.state}
-                  onChange={handleChange}
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  placeholder="Street Address"
+                  className="input"
+                  required
                 />
-                {errors.state && (
-                  <p className="text-red-500 text-xs mt-1">{errors.state}</p>
-                )}
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  ZIP Code *
-                </label>
                 <input
                   type="text"
-                  name="zip"
-                  value={form.zip}
-                  onChange={handleChange}
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  placeholder="Appartment, suite, etc. (optional)"
+                  className="input"
                 />
-                {errors.zip && (
-                  <p className="text-red-500 text-xs mt-1">{errors.zip}</p>
-                )}
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Email *
-                </label>
+                <input
+                  type="text"
+                  placeholder="State"
+                  className="input"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Zip"
+                  className="input"
+                  required
+                />
                 <input
                   type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  placeholder="Email Address"
+                  className="input"
+                  required
                 />
-                {errors.email && (
-                  <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-                )}
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Phone *
-                </label>
                 <input
-                  type="tel"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  type="text"
+                  placeholder="Phone Number"
+                  className="input"
+                  required
                 />
-                {errors.phone && (
-                  <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
-                )}
               </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Order Notes
+              <div className="mt-4">
+                <input type="checkbox" id="ship-to-different-address" />
+                <label htmlFor="ship-to-different-address" className="ml-2">
+                  Ship to a different address?
                 </label>
-                <textarea
-                  name="orderNotes"
-                  value={form.orderNotes}
-                  onChange={handleChange}
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
-                />
               </div>
-              <button
-                type="submit"
-                className="bg-green-500 text-white py-2 px-4 rounded-md mx-auto"
-              >
-                Place Order
-              </button>
+              <textarea
+                placeholder="Order notes (optional)"
+                className="input mt-4"
+              ></textarea>
             </form>
           </div>
-          <div className="w-full md:w-1/3 px-4">
-            <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
-            <div className=" rounded-md">
-              <div className="flex justify-between py-2">
-                <h1>Products</h1>
-                <h1>Subtotal</h1>
-              </div>
-              <hr  className="py-2"/>
-              {cart.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex justify-between mb-2 bg-gray-100 border items-center gap-2"
-                >
-                  <img className="h-[70px] w-[70px]" src={item.image} alt="" />
-                  <div>
-                    <span className="text-[14px]">
-                      {item.name} x ({item.quantity})
-                    </span>
-                    <div className="">
-                      <p className="text-gray-500 text-sm">SKU: {item.SKU}</p>
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Your Order</h2>
+            <div className="border rounded-lg p-4 shadow-md">
+              <ul>
+                {cart.map((item) => (
+                  <li
+                    key={item.id}
+                    className="flex justify-between items-center mb-4"
+                  >
+                    <div className="flex items-center">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-16 h-16 object-cover rounded-md"
+                      />
+                      <div className="ml-4 flex items-center gap-6">
+                        <div>
+                          <h3 className="text-lg font-medium">{item.name}</h3>
+                          <p className="text-gray-500 text-sm">
+                            SKU: {item.SKU}
+                          </p>
+                        </div>
+                        <p>(x {item.quantity})</p>
+                      </div>
                     </div>
-                  </div>
-                  <span>
-                    ${calculateItemTotal(item.price, item.quantity).toFixed(2)}
-                  </span>
-                </div>
-              ))}
-
-              <div className="flex justify-between mt-4 border-t pt-4">
+                    <p className="text-lg font-medium">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex justify-between mb-2">
                 <span>Subtotal</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between mt-2">
+              <div className="flex justify-between mb-2">
+                <span>Coupon Discount</span>
+                <span>(-) 00.00</span>
+              </div>
+              <div className="flex justify-between mb-4">
                 <span>Shipping</span>
                 <span>${shippingCost.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between mt-4 border-t pt-4">
+              <div className="flex justify-between text-lg font-medium mb-4">
                 <span>Total</span>
-                <span>${grandTotal}</span>
+                <span>${grandTotal.toFixed(2)}</span>
               </div>
+              <h3 className="text-lg font-medium mb-4">Payment Method</h3>
+              <div className="flex flex-col mb-4">
+                <label className="flex items-center mb-2">
+                  <input
+                    type="radio"
+                    name="payment-method"
+                    value="paypal"
+                    className="mr-2"
+                    onChange={() => setPaymentMethod("PayPal")}
+                  />
+                  <img src={payment} alt="" />
+                </label>
+                <label className="flex items-center mb-2">
+                  <input
+                    type="radio"
+                    name="payment-method"
+                    value="bank-transfer"
+                    className="mr-2"
+                    onChange={() => setPaymentMethod("Direct bank transfer")}
+                  />
+                  Direct bank transfer
+                </label>
+                <label className="flex items-center mb-2">
+                  <input
+                    type="radio"
+                    name="payment-method"
+                    value="cod"
+                    className="mr-2"
+                    onChange={() => setPaymentMethod("Cash on delivery")}
+                  />
+                  Cash on delivery
+                </label>
+              </div>
+              <button
+                className="w-full bg-green-500 text-white py-2 rounded-md"
+                onClick={handlePlaceOrder}
+              >
+                Place Order
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50]">
+          <div className="bg-white rounded-lg p-8 max-w-lg mx-auto animate-fadeIn">
+            <div className="flex justify-between items-center border-b pb-4 mb-4">
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-green-500">Thank You</h2>
+                <p className="text-gray-700">Your order has been received</p>
+              </div>
+              <button
+                onClick={closeModal}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                &times;
+              </button>
+            </div>
+            <div className="mb-4">
+              <p className="text-gray-700">Order Number: {orderNumber}</p>
+              <p className="text-gray-700">Date: {today}</p>
+              <p className="text-gray-700">Total: ${grandTotal.toFixed(2)}</p>
+              <p className="text-gray-700">Payment Method: {paymentMethod}</p>
+            </div>
+            <div className="border-t pt-4">
+              <h3 className="text-lg font-semibold mb-4">Order Details</h3>
+              <table className="w-full">
+                <thead>
+                  <tr>
+                    <th className="text-left">Products</th>
+                    <th className="text-left">Qty</th>
+                    <th className="text-left">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cart.map((item) => (
+                    <tr key={item.id} className="border-b">
+                      <td className="py-2">
+                        <div className="flex items-center">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-12 h-12 object-cover rounded-md mr-4"
+                          />
+                          <div>
+                            <p className="font-medium">{item.name}</p>
+                            <p className="text-gray-500 text-sm">
+                              SKU: {item.SKU}
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-2">x{item.quantity}</td>
+                      <td className="py-2">
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="mt-4">
+                <div className="flex justify-between">
+                  <span>Shipping</span>
+                  <span>${shippingCost.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-lg font-medium">
+                  <span>Total</span>
+                  <span>${grandTotal.toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 text-center">
+              <p className="text-gray-700">
+                Your order is currently being processed. You will receive an
+                order confirmation email shortly with the expected delivery date
+                for your items.
+              </p>
+              <button
+                onClick={closeModal}
+                className="mt-4 bg-green-500 text-white py-2 px-4 rounded-md"
+              >
+                Track your order
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
