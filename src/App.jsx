@@ -269,6 +269,8 @@ import PlantCare from "./pages/PlantCare";
 import Blogs from "./pages/Blogs";
 import ShoppingCart from "./components/ShoppingCart";
 import { CartProvider } from "./context/CartContext";
+import Checkout from "./pages/Checkout/Checkout";
+import store from "./redux/store";
 
 const App = () => {
   const [modal, setModal] = useState(false);
@@ -487,7 +489,7 @@ const App = () => {
         </div>
       </div>
 
-      <CartProvider>
+      <CartProvider store={store}>
         {/* <Router> */}
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-0">
           <Routes>
@@ -498,6 +500,7 @@ const App = () => {
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/shop/flower/:id" element={<Shop />} />
             <Route path="/cart" element={<ShoppingCart />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </div>
         {/* </Router> */}
