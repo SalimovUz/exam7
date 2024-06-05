@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import payment from "../../../public/images/payment.svg";
 import "tailwindcss/tailwind.css";
+import Footer from "../../components/Footer";
+import "../../App.css"
 
 // Generate a random order number
 const generateOrderNumber = () => Math.floor(100000 + Math.random() * 900000);
@@ -46,81 +48,183 @@ const Checkout = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <h2 className="text-2xl font-semibold mb-4">Billing Address</h2>
-            <form>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  placeholder="First Name"
-                  className="input"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  className="input"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Country / Region"
-                  className="input"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Town / City"
-                  className="input"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Street Address"
-                  className="input"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Appartment, suite, etc. (optional)"
-                  className="input"
-                />
-                <input
-                  type="text"
-                  placeholder="State"
-                  className="input"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Zip"
-                  className="input"
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="input"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Phone Number"
-                  className="input"
-                  required
-                />
-              </div>
-              <div className="mt-4">
-                <input type="checkbox" id="ship-to-different-address" />
-                <label htmlFor="ship-to-different-address" className="ml-2">
-                  Ship to a different address?
+            <form className="flex w-full gap-10">
+              <div className="left w-1/2 flex flex-col gap-2">
+                <label className="flex flex-col gap-2" htmlFor="name">
+                  <h1>
+                    First Name{" "}
+                    <span className="text-[#F03800] text-[22px] font-normal">
+                      *
+                    </span>
+                  </h1>
+                  <input
+                    className="border rounded-md border-[#EAEAEA] p-2"
+                    type="text"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2" htmlFor="name">
+                  <h1>
+                    Country / Region
+                    <span className="text-[#F03800] text-[22px] font-normal">
+                      *
+                    </span>
+                  </h1>
+                  <select
+                    className="border rounded-md border-[#EAEAEA] p-2"
+                    name=""
+                    id=""
+                  >
+                    <option
+                      className="text-[#A5A5A5] text-[14px]"
+                      value="Country"
+                      disabled
+                      selected
+                      hidden
+                    >
+                      Select a country / region
+                    </option>
+                    <option value="Country">Qashqadaryo</option>
+                  </select>
+                </label>
+
+                <label className="flex flex-col gap-2" htmlFor="name">
+                  <h1>
+                    Street Address
+                    <span className="text-[#F03800] text-[22px] font-normal">
+                      *
+                    </span>
+                  </h1>
+                  <input
+                    className="border rounded-md border-[#EAEAEA] p-2"
+                    type="text"
+                  />
+                </label>
+                <label className="flex flex-col gap-2" htmlFor="name">
+                  <h1>
+                    State
+                    <span className="text-[#F03800] text-[22px] font-normal">
+                      *
+                    </span>
+                  </h1>
+                  <select
+                    className="border rounded-md border-[#EAEAEA] p-2"
+                    name=""
+                    id=""
+                  >
+                    <option
+                      className="text-[#A5A5A5] text-[14px]"
+                      value="Country"
+                      disabled
+                      selected
+                      hidden
+                    >
+                      Select a state
+                    </option>
+                    <option value="Country">Chiroqchi</option>
+                  </select>
+                </label>
+
+                <label className="flex flex-col gap-2" htmlFor="email">
+                  <h1>
+                    Email address
+                    <span className="text-[#F03800] text-[22px] font-normal">
+                      *
+                    </span>
+                  </h1>
+                  <input
+                    className="border rounded-md border-[#EAEAEA] p-2"
+                    type="email"
+                  />
+                </label>
+                <label className="flex gap-2" htmlFor="radio">
+                  <input type="radio" name="" id="" />
+                  <h1>Ship to a different address?</h1>
+                </label>
+
+                <label htmlFor="area">
+                  <h1>Order notes (optional)</h1>
+                  <fieldset>
+                    <textarea
+                      className="border rounded-md border-[#EAEAEA] p-2"
+                      name=""
+                      id=""
+                      cols="30"
+                      rows="5"
+                    ></textarea>
+                  </fieldset>
                 </label>
               </div>
-              <textarea
-                placeholder="Order notes (optional)"
-                className="input mt-4"
-              ></textarea>
+
+              <div className="right w-1/2 flex flex-col gap-2">
+                <label className="flex flex-col gap-2" htmlFor="name">
+                  <h1>
+                    Last Name{" "}
+                    <span className="text-[#F03800] text-[22px] font-normal">
+                      *
+                    </span>
+                  </h1>
+                  <input
+                    className="border rounded-md border-[#EAEAEA] p-2"
+                    type="text"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2" htmlFor="name">
+                  <h1>
+                    Town / City
+                    <span className="text-[#F03800] text-[22px] font-normal">
+                      *
+                    </span>
+                  </h1>
+                  <input
+                    className="border rounded-md border-[#EAEAEA] p-2"
+                    type="text"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2 mt-10" htmlFor="name">
+                  <input
+                    className="border rounded-md border-[#EAEAEA] p-2"
+                    type="text"
+                    placeholder="Appartment, suite, unit, etc. (optional)"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2" htmlFor="name">
+                  <h1>
+                    Zip
+                    <span className="text-[#F03800] text-[22px] font-normal">
+                      *
+                    </span>
+                  </h1>
+                  <input
+                    className="border rounded-md border-[#EAEAEA] p-2"
+                    type="text"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2" htmlFor="name">
+                  <h1>
+                    Phone Number
+                    <span className="text-[#F03800] text-[22px] font-normal">
+                      *
+                    </span>
+                  </h1>
+                  <div className="flex gap-2 w-full">
+                    <select className="border rounded-md border-[#EAEAEA] p-2">
+                      <option value="uzb">+998</option>
+                    </select>
+                    <input
+                      className="border rounded-md border-[#EAEAEA] p-2 w-full"
+                      type="text"
+                    />
+                  </div>
+                </label>
+              </div>
             </form>
           </div>
-          <div>
+          <div className="">
             <h2 className="text-2xl font-semibold mb-4">Your Order</h2>
             <div className="border rounded-lg p-4 shadow-md">
               <ul>
@@ -295,6 +399,7 @@ const Checkout = () => {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 };
