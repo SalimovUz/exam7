@@ -11,6 +11,11 @@ import { NavLink } from "react-router-dom";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(0);
+  const [activeCategory, setActiveCategory] = useState("allplants");
+
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category);
+  };
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -105,19 +110,85 @@ const Home = () => {
 
         <div className="section w-full">
           <div className="top flex items-center justify-between">
-            <ul className="cate left  flex space-x-4">
+            {/* <ul className="cate left  flex space-x-4">
               <NavLink
-                className="border-b-2 border-[#46a358] text-[#46a358] text-[15px] font-semibold"
+                onClick={() => setCategory("allplants")}
+                className="border-b-2 cursor-pointer border-[#46a358] text-[#46a358] text-[15px] font-semibold"
                 to="/"
               >
                 All Plants
               </NavLink>
-              <NavLink className=" text-[#3D3D3D] text-[15px]" to="/">
+              <NavLink
+                onClick={() => setCategory("new")}
+                className=" cursor-pointer text-[#3D3D3D] text-[15px]"
+                to="/"
+              >
                 New Arrivals
               </NavLink>
-              <NavLink className=" text-[#3D3D3D] text-[15px]" to="/">
+              <NavLink
+                onClick={() => setCategory("sale")}
+                className=" cursor-pointer text-[#3D3D3D] text-[15px]"
+                to="/"
+              >
                 Sale
               </NavLink>
+
+              {category === "allplants" && (
+                <FlowerList
+                  flowers={data}
+                  currentPage={currentPage}
+                  handlePageClick={handlePageClick}
+                  addtocartnum={addtocartnum}
+                />
+              )}
+              {category === "new" && (
+                <FlowerList
+                  flowers={data}
+                  currentPage={currentPage}
+                  handlePageClick={handlePageClick}
+                  addtocartnum={addtocartnum}
+                />
+              )}
+              {category === "sale" && (
+                <FlowerList
+                  flowers={data}
+                  currentPage={currentPage}
+                  handlePageClick={handlePageClick}
+                  addtocartnum={addtocartnum}
+                />
+              )}
+            </ul> */}
+            <ul className="cate left flex space-x-4">
+              <li
+                onClick={() => handleCategoryClick("allplants")}
+                className={`cursor-pointer text-[15px] ${
+                  activeCategory === "allplants"
+                    ? "border-b-2 border-[#46a358] text-[#46a358] font-semibold"
+                    : "text-[#3D3D3D]"
+                }`}
+              >
+                All Plants
+              </li>
+              <li
+                onClick={() => handleCategoryClick("new")}
+                className={`cursor-pointer text-[15px] ${
+                  activeCategory === "new"
+                    ? "border-b-2 border-[#46a358] text-[#46a358] font-semibold"
+                    : "text-[#3D3D3D]"
+                }`}
+              >
+                New Arrivals
+              </li>
+              <li
+                onClick={() => handleCategoryClick("sale")}
+                className={`cursor-pointer text-[15px] ${
+                  activeCategory === "sale"
+                    ? "border-b-2 border-[#46a358] text-[#46a358] font-semibold"
+                    : "text-[#3D3D3D]"
+                }`}
+              >
+                Sale
+              </li>
             </ul>
             <div className="right">
               <h3 className="text-gray-700">
@@ -136,12 +207,39 @@ const Home = () => {
             </div>
           </div>
 
-          <FlowerList
+          {/* <FlowerList
             flowers={data}
             currentPage={currentPage}
             handlePageClick={handlePageClick}
             addtocartnum={addtocartnum}
-          />
+          /> */}
+
+          <div>
+            {activeCategory === "allplants" && (
+              <FlowerList
+                flowers={data}
+                currentPage={currentPage}
+                handlePageClick={handlePageClick}
+                addtocartnum={addtocartnum}
+              />
+            )}
+            {activeCategory === "new" && (
+              <FlowerList
+                flowers={data}
+                currentPage={currentPage}
+                handlePageClick={handlePageClick}
+                addtocartnum={addtocartnum}
+              />
+            )}
+            {activeCategory === "sale" && (
+              <FlowerList
+                flowers={data}
+                currentPage={currentPage}
+                handlePageClick={handlePageClick}
+                addtocartnum={addtocartnum}
+              />
+            )}
+          </div>
         </div>
       </main>
 

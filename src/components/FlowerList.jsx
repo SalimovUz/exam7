@@ -31,7 +31,7 @@ const FlowerList = ({ flowers }) => {
 
   return (
     <div className="data">
-      <div className="flowers flex flex-wrap w-full justify-between gap-8 mt-8">
+      <div className="flowers flex flex-wrap  w-full justify-between gap-8 mt-8">
         {currentPageData.map((flower) => (
           <NavLink
             key={flower.id}
