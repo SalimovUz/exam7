@@ -17,10 +17,15 @@ const NoneShop = () => {
           <span className="font-normal ">Shop</span>
         </h1>
 
-        <h2 className="py-12 text-[15px] font-semibold opacity-80">
+        <h2 className="py-12 text-[15px] font-semibold opacity-80 text-center">
           Siz hali birorta hech narsa tanlamadiz, tanlash uchun pastdagi tugmani
           bosing
         </h2>
+
+        <img className="w-[200px] h-[200px] flex mx-auto"
+          src="https://cdn3.iconfinder.com/data/icons/shopping-and-ecommerce-29/90/empty_cart-512.png"
+          alt=""
+        />
 
         <NavLink
           to="/"
