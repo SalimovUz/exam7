@@ -3,7 +3,6 @@ import { useParams, NavLink } from "react-router-dom";
 import HoverRating from "../../components/HoverRating";
 import Footer from "../../components/Footer";
 import ProductDescription from "../../components/ProductDescription";
-import ProductCarousel from "../../components/ProductCarousel";
 import { data } from "../../data/data";
 import NoneShop from "./NoneShop";
 import FlowerDetail from "../../components/FlowerDetail";

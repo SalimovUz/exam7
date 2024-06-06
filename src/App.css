@@ -40,5 +40,19 @@ body {
     }
 }
 
+/* styles.css */
+.header form input {
+  border: 1px solid #46a358;
+  border-radius: 20px;
+  padding: 8px 20px;
+  outline: none;
+}
+
+.header form button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";

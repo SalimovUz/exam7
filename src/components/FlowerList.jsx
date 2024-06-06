@@ -108,4 +108,3 @@ const FlowerList = ({ flowers }) => {
 };
 
 export default FlowerList;
-
