@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams, useNavigate, NavLink } from "react-router-dom";
-import { data } from "../data/data"; // Adjust the import path as needed
+import { data } from "../data/data";
 import HoverRating from "./HoverRating";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
@@ -20,21 +20,15 @@ const FlowerDetail = () => {
   };
 
   const addtocartnum = () => {
-    // const cartNum = document.querySelector(".cartnum");
-    // cartNum.innerHTML = parseInt(cartNum.innerHTML) + 1;
     SetNum(num + 1);
   };
   const minustocartnum = () => {
     if (num <= 0) return;
-    // const cartNum = document.querySelector(".cartnum");
     SetNum(num - 1);
-    // cartNum.innerHTML = parseInt(cartNum.innerHTML) - 1;
   };
-  
-  // Header ga qo'shish card ni
-  
+
   const [addheader, setAddheader] = useState(false);
-  
+
   const handleAddheader = () => {
     const cartNum = document.querySelector(".cartnum");
     cartNum.innerHTML = 1;
@@ -127,6 +121,7 @@ const FlowerDetail = () => {
                   BUY NOW
                 </button>
               </NavLink>
+
               <button
                 onClick={handleAddheader}
                 className="bg-white border-2 border-[#46a358] text-[#46a358] px-6 py-2 rounded-[6px] hover:bg-gray-100"
