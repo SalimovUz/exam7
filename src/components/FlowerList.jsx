@@ -72,7 +72,7 @@ const FlowerList = ({ flowers }) => {
                 {flower.name}
               </p>
               <h2 className="text-[18px] font-bold text-[#46a358]">
-                {flower.price}
+                $ {flower.price}
               </h2>
             </div>
           </NavLink>
